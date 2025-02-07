@@ -3,8 +3,13 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 # Create your models here.
 
+class Delegacias(models.Model):
 
-class Delegacia(models.Model):
+    nome = models.CharField(max_length=50)
+    endereço = models.CharField(max_length=100)
+
+
+class Dados(models.Model):
 
     MESES = (
         ("Jan","Janeiro"),
@@ -20,7 +25,8 @@ class Delegacia(models.Model):
         ("Nov","Novembro"),
         ("Dez","Dezembro")
     )
-    
+
+
     ano = models.IntegerField(
         validators=[
             MinValueValidator(2001),

@@ -8,11 +8,16 @@ class Delegacia(models.Model):
     nome = models.CharField(max_length=50)
     endereço = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.nome
+
 class Crime(models.Model):
     
     nome = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nome
 
-class Dados(models.Model):
+class DadosBoletim(models.Model):
 
     MESES = (
         ("Jan","Janeiro"),
@@ -42,8 +47,11 @@ class Dados(models.Model):
         choices=MESES
     )
 
-    crime = models.ForeignKey(Crime, on_delete=models.CASCADE)
-    delegacia = models.ForeignKey(Delegacia, on_delete=models.CASCADE)
+    crime = models.ForeignKey(Crime, on_delete=models.PROTECT)
+    delegacia = models.ForeignKey(Delegacia, on_delete=models.PROTECT)
 
     nCrimes = models.PositiveIntegerField()
+
+    def __str__(self):
+        return str(self.delegacia) + " - " + str(self.crime) + " - " + str(self.mes) + "/" +str(self.ano)
 
